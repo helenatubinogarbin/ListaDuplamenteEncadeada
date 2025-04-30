@@ -1,0 +1,156 @@
+public class ListaDuplamenteEncadeada {
+	private Nodo inicio; 
+	
+
+	public ListaDuplamenteEncadeada() 
+	{
+		this.setInicio(null); 
+	}
+	
+	
+	public Nodo getInicio() {
+		return inicio;
+	}
+
+	public void setInicio(Nodo inicio) {
+		this.inicio = inicio;
+	}
+
+	public void inserirOrdem(int valor) {
+	Nodo novo = new Nodo(valor, null, null); 
+
+	if(this.inicio == null) 
+	
+		{
+			this.inicio=novo; 
+			return; 	
+		}
+	
+	
+	Nodo atual = inicio;   
+	while(atual != null)   
+	{
+		 
+		if(atual.getValor() == valor) 
+		{
+			System.out.println("Valor: " +valor+ " já existe na lista, não será inserido");
+			return; 
+		}
+		atual = atual.getProx();  
+	}
+	
+	atual = this.inicio; 
+	
+	if(valor<atual.getValor()) 
+
+	{
+		novo.setProx(inicio);  
+		inicio.setAnt(novo); 
+		inicio = novo;   
+		return;
+	}
+	
+	
+	while(atual.getProx() != null && atual.getProx().getValor() <valor)
+
+	{
+		atual = atual.getProx();
+	}
+	
+	novo.setProx(atual.getProx());  
+	novo.setAnt(atual);
+	
+	if(atual.getProx() != null)
+		
+	{
+		atual.getProx().setAnt(novo); 
+	}
+	
+	atual.setProx(novo);  
+	}
+
+	public void imprime() {
+		 
+		if(this.inicio==null)
+		{
+			System.out.println("Lista Vazia");
+		}
+		else
+		{ 
+			Nodo aux = this.inicio; 
+			int posicao = 1; 
+			while(aux != null) 
+			{
+				System.out.println("Posição: " +posicao+ " de Valor: " +aux.getValor());
+				aux = aux.getProx(); 
+				
+				posicao ++;
+			}
+		}
+	} 
+	
+	public void removeValor(int valor) {
+
+
+		if(this.inicio == null) 
+		{
+			System.out.println("Não é possível remover. Lista vazia!");
+			return; 
+		}
+		
+	
+		Nodo aux = this.inicio; 
+		
+		while(aux != null)
+		{
+			if(aux.getValor() == valor) 
+			{
+				if(aux == inicio) 
+				{
+					inicio=aux.getProx(); 		
+					if(inicio!=null)
+					inicio.setAnt(null); 
+		} else { 
+			aux.getAnt().setProx(aux.getProx()); 
+			if(aux.getProx()!=null) 
+				aux.getProx().setAnt(aux.getAnt());  
+		}
+			System.out.println("O valor: " +valor+ " foi removido");
+			return;
+		}
+		
+		aux = aux.getProx(); 
+	}
+	
+	System.out.println("O valor: " +valor+ " não foi encontrado.");
+}
+
+
+	public void pesquisaValor(int valor)
+	{
+		if(inicio == null)
+		{
+			System.out.println("Não é possível pesquisar. Lista Vazia!");
+			return; 
+		}
+		
+		
+		Nodo aux = inicio;
+		int posicao = 1; 
+		
+		while(aux!=null)
+		{
+			if(aux.getValor() == valor)
+			{
+				System.out.println("O valor: " +valor+ " encontrado na posição: " +posicao+ ".");
+				return; 
+			}
+			
+			aux = aux.getProx(); 
+			posicao++; 
+		}
+		
+		System.out.println("O valor : " +valor+ " não foi encontrado na lista.");
+		
+	}
+}
