@@ -110,20 +110,10 @@ public class ListaDuplamenteEncadeada {
 		{
 			if(aux.getValor() == valor) 
 			{
-				if(aux == inicio) 
-				{
-					inicio=aux.getProx(); 		
-					if(inicio!=null)
-					inicio.setAnt(null); 
-		} else { 
-			aux.getAnt().setProx(aux.getProx()); 
-			if(aux.getProx()!=null) 
-				aux.getProx().setAnt(aux.getAnt());  
-		}
-			System.out.println("O valor: " +valor+ " foi removido");
-			return;
-		}
-		
+				removerNodo(aux);
+                		System.out.println("O valor: " + valor + " foi removido");
+                		return;
+            		}
 		aux = aux.getProx(); 
 	}
 	
@@ -178,5 +168,17 @@ public class ListaDuplamenteEncadeada {
             atual = atual.getProx();
         }
         return false;
+ 	private void removerNodo(Nodo nodo) {
+       	   if (nodo == inicio) {
+            	inicio = nodo.getProx();
+            	if (inicio != null) {
+                	inicio.setAnt(null);
+            }
+        } else {
+            nodo.getAnt().setProx(nodo.getProx());
+            if (nodo.getProx() != null) {
+                nodo.getProx().setAnt(nodo.getAnt());
+            }
+        }
     }
 }
