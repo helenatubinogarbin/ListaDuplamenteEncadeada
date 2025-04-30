@@ -19,8 +19,8 @@ public class ListaDuplamenteEncadeada {
 	public void inserirEmOrdem(int valor) {
 	Nodo novo = new Nodo(valor, null, null); 
 
-	if(this.inicio == null) 
-	
+	if(this.listaEstaVazia()) 
+
 		{
 			this.inicio=novo; 
 			return; 	
@@ -71,9 +71,10 @@ public class ListaDuplamenteEncadeada {
 
 	public void imprime() {
 		 
-		if(this.inicio==null)
+		if(this.listaEstaVazia())
 		{
 			System.out.println("Lista Vazia");
+			return;
 		}
 		else
 		{ 
@@ -92,7 +93,7 @@ public class ListaDuplamenteEncadeada {
 	public void removeValor(int valor) {
 
 
-		if(this.inicio == null) 
+		if(this.listaEstaVazia()) 
 		{
 			System.out.println("Não é possível remover. Lista vazia!");
 			return; 
@@ -128,7 +129,7 @@ public class ListaDuplamenteEncadeada {
 
 	public void pesquisaValor(int valor)
 	{
-		if(inicio == null)
+		if(this.listaEstaVazia())
 		{
 			System.out.println("Não é possível pesquisar. Lista Vazia!");
 			return; 
@@ -152,5 +153,10 @@ public class ListaDuplamenteEncadeada {
 		
 		System.out.println("O valor : " +valor+ " não foi encontrado na lista.");
 		
+	}
+
+	private boolean listaEstaVazia()
+	{
+		return inicio == null;
 	}
 }
