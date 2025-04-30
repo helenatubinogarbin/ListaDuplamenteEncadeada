@@ -16,7 +16,7 @@ public class ListaDuplamenteEncadeada {
 		this.inicio = inicio;
 	}
 
-	public void inserirOrdem(int valor) {
+	public void inserirEmOrdem(int valor) {
 	Nodo novo = new Nodo(valor, null, null); 
 
 	if(this.inicio == null) 
