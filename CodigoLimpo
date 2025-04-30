@@ -17,12 +17,11 @@ public class ListaDuplamenteEncadeada {
 	}
 
 	public void inserirEmOrdem(int valor) {
-	Nodo novo = new Nodo(valor, null, null); 
 
 	if(this.listaEstaVazia()) 
 
 		{
-			this.inicio=novo; 
+			inserirPrimeiroNodo(valor);
 			return; 	
 		}
 	
@@ -38,7 +37,8 @@ public class ListaDuplamenteEncadeada {
 		}
 		atual = atual.getProx();  
 	}
-	
+
+	Nodo novo = new Nodo(valor, null, null)
 	atual = this.inicio; 
 	
 	if(valor<atual.getValor()) 
@@ -74,7 +74,7 @@ public class ListaDuplamenteEncadeada {
 		if(this.listaEstaVazia())
 		{
 			System.out.println("Lista Vazia");
-			return;
+			return
 		}
 		else
 		{ 
@@ -158,5 +158,10 @@ public class ListaDuplamenteEncadeada {
 	private boolean listaEstaVazia()
 	{
 		return inicio == null;
+	}
+
+	private void inserirPrimeiroNodo(int valor)
+	{
+		this.inicio = new Nodo(valor, null, null); 
 	}
 }
