@@ -24,7 +24,11 @@ public class ListaDuplamenteEncadeada {
 			inserirPrimeiroNodo(valor);
 			return; 	
 		}
-	
+	if(valorExiste(valor))
+	{
+		System.out.println("Valor: "+valor+"já existe na lista, não será inserido");
+		return; 
+	}
 	
 	Nodo atual = inicio;   
 	while(atual != null)   
@@ -164,4 +168,15 @@ public class ListaDuplamenteEncadeada {
 	{
 		this.inicio = new Nodo(valor, null, null); 
 	}
+
+	private boolean valorExiste(int valor) {
+        Nodo atual = inicio;
+        while (atual != null) {
+            if (atual.getValor() == valor) {
+                return true;
+            }
+            atual = atual.getProx();
+        }
+        return false;
+    }
 }
