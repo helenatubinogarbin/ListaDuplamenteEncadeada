@@ -1,80 +1,67 @@
 public class ListaDuplamenteEncadeada {
 	private Nodo inicio; 
-	
-
 	public ListaDuplamenteEncadeada() 
 	{
 		this.setInicio(null); 
 	}
-	
-	
-	public Nodo getInicio() {
+	public Nodo getInicio() 
+	{
 		return inicio;
 	}
-
-	public void setInicio(Nodo inicio) {
+	public void setInicio(Nodo inicio) 
+	{
 		this.inicio = inicio;
 	}
 
 	public void inserirEmOrdem(int valor) {
-
-	if(this.listaEstaVazia()) 
-
+		if(this.listaEstaVazia()) 
 		{
 			inserirPrimeiroNodo(valor);
 			return; 	
 		}
-	if(valorExiste(valor))
-	{
-		System.out.println("Valor: "+valor+"já existe na lista, não será inserido");
-		return; 
-	}
-	
-	Nodo atual = inicio;   
-	while(atual != null)   
-	{
-		 
-		if(atual.getValor() == valor) 
+		if(valorExiste(valor))
 		{
-			System.out.println("Valor: " +valor+ " já existe na lista, não será inserido");
+			System.out.println("Valor: "+valor+"já existe na lista, não será inserido");
 			return; 
 		}
-		atual = atual.getProx();  
+		Nodo atual = inicio;   
+		while(atual != null)   
+		{ 
+			if(atual.getValor() == valor) 
+			{
+				System.out.println("Valor: " +valor+ " já existe na lista, não será inserido");
+				return; 
+			}
+			atual = atual.getProx();  
+		}
+		Nodo novo = new Nodo(valor, null, null)
+		atual = this.inicio; 
+		if(valor<atual.getValor()) 
+		{
+			novo.setProx(inicio);  
+			inicio.setAnt(novo); 
+			inicio = novo;   
+			return;
+		}
+
+		while(atual.getProx() != null && atual.getProx().getValor() <valor)
+		{
+			atual = atual.getProx();
+		}
+	
+		novo.setProx(atual.getProx());  
+		novo.setAnt(atual);
+	
+		if(atual.getProx() != null)	
+		{
+			atual.getProx().setAnt(novo); 
+		}
+	
+		atual.setProx(novo);  
 	}
 
-	Nodo novo = new Nodo(valor, null, null)
-	atual = this.inicio; 
-	
-	if(valor<atual.getValor()) 
-
+	public void imprime() 
 	{
-		novo.setProx(inicio);  
-		inicio.setAnt(novo); 
-		inicio = novo;   
-		return;
-	}
-	
-	
-	while(atual.getProx() != null && atual.getProx().getValor() <valor)
-
-	{
-		atual = atual.getProx();
-	}
-	
-	novo.setProx(atual.getProx());  
-	novo.setAnt(atual);
-	
-	if(atual.getProx() != null)
-		
-	{
-		atual.getProx().setAnt(novo); 
-	}
-	
-	atual.setProx(novo);  
-	}
-
-	public void imprime() {
-		 
 		if(this.listaEstaVazia())
 		{
 			System.out.println("Lista Vazia");
@@ -88,24 +75,19 @@ public class ListaDuplamenteEncadeada {
 			{
 				System.out.println("Posição: " +posicao+ " de Valor: " +aux.getValor());
 				aux = aux.getProx(); 
-				
 				posicao ++;
 			}
 		}
 	} 
 	
-	public void removeValor(int valor) {
-
-
+	public void removeValor(int valor) 
+	{
 		if(this.listaEstaVazia()) 
 		{
 			System.out.println("Não é possível remover. Lista vazia!");
 			return; 
 		}
-		
-	
 		Nodo aux = this.inicio; 
-		
 		while(aux != null)
 		{
 			if(aux.getValor() == valor) 
@@ -115,11 +97,10 @@ public class ListaDuplamenteEncadeada {
                 		return;
             		}
 		aux = aux.getProx(); 
-	}
+		}
 	
 	System.out.println("O valor: " +valor+ " não foi encontrado.");
-}
-
+	}
 
 	public void pesquisaValor(int valor)
 	{
@@ -128,11 +109,8 @@ public class ListaDuplamenteEncadeada {
 			System.out.println("Não é possível pesquisar. Lista Vazia!");
 			return; 
 		}
-		
-		
 		Nodo aux = inicio;
 		int posicao = 1; 
-		
 		while(aux!=null)
 		{
 			if(aux.getValor() == valor)
@@ -159,26 +137,35 @@ public class ListaDuplamenteEncadeada {
 		this.inicio = new Nodo(valor, null, null); 
 	}
 
-	private boolean valorExiste(int valor) {
-        Nodo atual = inicio;
-        while (atual != null) {
-            if (atual.getValor() == valor) {
-                return true;
-            }
+	private boolean valorExiste(int valor) 
+	{
+        	Nodo atual = inicio;
+        	while (atual != null) 
+		{
+            		if (atual.getValor() == valor) 
+			{
+               			return true;
+            		}
             atual = atual.getProx();
-        }
+        	}
         return false;
- 	private void removerNodo(Nodo nodo) {
-       	   if (nodo == inicio) {
-            	inicio = nodo.getProx();
-            	if (inicio != null) {
-                	inicio.setAnt(null);
-            }
-        } else {
-            nodo.getAnt().setProx(nodo.getProx());
-            if (nodo.getProx() != null) {
-                nodo.getProx().setAnt(nodo.getAnt());
-            }
-        }
-    }
+	}
+ 	private void removerNodo(Nodo nodo) 
+	{
+       		if (nodo == inicio) 
+		{
+            		inicio = nodo.getProx();
+            		if (inicio != null) 
+			{
+                		inicio.setAnt(null);
+            		}
+      	        } else 
+		{
+            		nodo.getAnt().setProx(nodo.getProx());
+           		if (nodo.getProx() != null) 
+			{
+                		nodo.getProx().setAnt(nodo.getAnt());
+            		}
+        	}
+    	}
 }
